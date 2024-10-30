@@ -1,0 +1,104 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download PDF</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+    .invoice-header {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .invoice-details {
+        margin-bottom: 20px;
+    }
+    .invoice-details table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    .invoice-details table, .invoice-details th, .invoice-details td {
+        border: 1px solid #ddd;
+    }
+    .invoice-details th, .invoice-details td {
+        padding: 8px;
+        text-align: left;
+    }
+    .invoice-details th {
+        background-color: #f4f4f4;
+    }
+    .invoice-footer {
+        text-align: center;
+        margin-top: 20px;
+    }
+</style>
+<body>
+    <div class="invoice-header">
+        <h1>Invoice</h1>
+    </div>
+    <div class="invoice-details">
+        <h2>User Details</h2>
+        <table>
+            <tr>
+                <th>First Name</th>
+                <td>{{ inquiry.first_name }}</td>
+            </tr>
+            <tr>
+                <th>Last Name</th>
+                <td>{{ inquiry.last_name }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ inquiry.email }}</td>
+            </tr>
+            <tr>
+                <th>Phone</th>
+                <td>{{ inquiry.phone }}</td>
+            </tr>
+            <tr>
+                <th>City</th>
+                <td>{{ inquiry.city }}</td>
+            </tr>
+            <tr>
+                <th>State</th>
+                <td>{{ inquiry.state }}</td>
+            </tr>
+        </table>
+
+        <h2>Car Details</h2>
+        <table>
+            <tr>
+                <th>Car Title</th>
+                <td>Porsche 911 GT3 RS</td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td>$ 548,240</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ cars.description }}</td>
+            </tr>
+            <!-- Add more fields as necessary -->
+        </table>
+    </div>
+    <div class="invoice-footer">
+        <p>Thank you for your inquiry!</p>
+    </div>
+
+    <button id="download">Download as PDF</button>
+
+    <script>
+        document.getElementById('download').addEventListener('click', () => {
+            const element = document.body; // or any specific element you want to convert
+            html2pdf().from(element).save('download.pdf');
+        });
+    </script>
+</body>
+</html>

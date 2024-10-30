@@ -1,0 +1,157 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static 'Logo.png' %}">
+    <title>ABOUT US | RUSTOM</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Header styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        header nav {
+            width: 90%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+        }
+        header nav .logo {
+            width: 150px;
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        header nav .menu {
+            display: flex;
+            align-items: center;
+        }
+        header nav .menu a {
+            color: #fff;
+            margin-left: 30px;
+            position: relative;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        header nav .menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background-color: #dd0707;
+            transition: width 0.4s ease;
+        }
+        header nav .menu a:hover::after {
+            width: 100%;
+        }
+        header nav .social a i {
+            color: #fff;
+            font-size: 22px;
+            margin-left: 10px;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        header nav .social a i:hover {
+            transform: scale(1.3);
+            color: #dd0707;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #292727;
+            color: #f8f9fa;
+            padding-top: 100px; /* Add space below the fixed header */
+            background-image: url('{% static "bg.jpg" %}');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+        }
+        container.mt-5 {
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay for readability */
+            padding: 30px;
+            border-radius: 10px;
+        }
+        h1, h2 {
+            color: #f8f9fa;
+        }
+        /* Override Bootstrap colors */
+        body, .bg-dark {
+            background-color: #292727 !important;
+        }
+        .navbar, .navbar-dark .navbar-nav .nav-link {
+            background-color: #292727 !important;
+            color: #fff !important;
+        }
+        .navbar-dark .navbar-nav .nav-link:hover {
+            color: #dd0707 !important;
+        }
+        .card, .card-body {
+            background-color: #292727 !important;
+            color: #f8f9fa !important;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <nav>
+        <a class="logo" href="{% url 'index' %}" style="color: rgb(215, 0, 0); font-size: 35px;"><b>RUSTOM</b></a>
+        <div class="menu">
+            <a href="{% url 'index' %}">Home</a>
+            <a href="{% url 'view_all_cars' %}">Inventory</a>
+            <a href="{% url 'about_us' %}">About Us</a>
+            <a href="{% url 'contact_us' %}">Contact Us</a>
+            <a href="{% url 'customer_review' %}">Customer Review</a>
+            <a href="{% url 'add_car' %}">Add Car</a>
+            <a href="{% url 'logout_view' %}">Logout</a>
+        </div>
+    </nav>
+</header>
+
+<div class="container mt-5">
+    <h1 class="text-center">About Us</h1>
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <h2>Who We Are</h2>
+            <p>At Car Dealership, we are committed to providing the best selection of vehicles at unbeatable prices. Our team of experts is passionate about cars and dedicated to helping you find your perfect match.</p>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <h2>Our Mission</h2>
+            <p>Our mission is to deliver exceptional customer service and build lasting relationships. We strive to make the car buying experience easy and enjoyable for everyone.</p>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <h2>Our Values</h2>
+            <ul>
+                <li>Integrity</li>
+                <li>Customer Satisfaction</li>
+                <li>Quality Assurance</li>
+                <li>Innovation</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

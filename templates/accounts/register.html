@@ -1,0 +1,221 @@
+{% extends 'base.html' %}
+
+{% block title %} | REGISTER {% endblock %}
+{% block content %}
+{% load static %}
+<style>
+    /* Page-specific styling */
+    .sub-banner {
+        background-color: #1e1e1e;
+        padding: 80px 0;
+        text-align: center;
+        color: #fff;
+        background-image: url('{% static "sub-banner-bg.jpg" %}');
+        background-size: cover;
+        background-position: center center;
+    }
+
+    .sub-banner .breadcrumb-area {
+        padding: 25px 0;
+    }
+
+    .sub-banner .breadcrumb-areas h1 {
+        font-size: 46px;
+        margin: 0;
+        font-weight: 700;
+    }
+
+    .sub-banner .breadcrumbs {
+        list-style: none;
+        padding: 0;
+    }
+
+    .sub-banner .breadcrumbs li {
+        display: inline;
+        margin: 0 5px;
+    }
+
+    .sub-banner .breadcrumbs li a {
+        color: rgba(229 56 56); /* Luxurious gold color */
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .sub-banner .breadcrumbs li.active {
+        color: #fff;
+    }
+
+    .contact-section {
+        background-color: #121212;
+        color: #f4f4f4;
+        padding: 70px 0;
+    }
+
+    .contact-section .form-section {
+        background-color: rgba(0, 0, 0, 0.9);
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .contact-section .logo-2 a {
+        color: #d70000; /* Bright red color */
+        font-size: 40px;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    .contact-section h3 {
+        text-align: center;
+        color: rgba(229 56 56); /* Luxurious gold color */
+        margin-bottom: 30px;
+        font-size: 30px;
+        font-weight: 600;
+    }
+
+    .contact-section .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .contact-section .form-group .input-text {
+        width: 100%;
+        padding: 14px;
+        border: 1px solid #333;
+        border-radius: 8px;
+        background-color: #222;
+        color: #ddd;
+        padding-left: 50px; /* Add space for icons */
+        position: relative;
+        font-size: 16px;
+    }
+
+    .contact-section .form-group .input-text::placeholder {
+        color: #999;
+    }
+
+    .contact-section .form-group .form-box i {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #ddd;
+        font-size: 18px;
+    }
+
+    .contact-section .btn-md.btn-success {
+        background-color: rgba(229 56 56); /* Luxurious gold color */
+        color: #fff;
+        padding: 14px 25px;
+        border: none;
+        border-radius: 30px;
+        text-transform: uppercase;
+        font-weight: bold;
+        transition: background-color 0.3s, border-color 0.3s;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    .contact-section .btn-md.btn-success:hover {
+        background-color: transparent;
+        border: 2px solid rgba(229 56 56);
+        color: rgba(229 56 56);
+    }
+
+    .contact-section .extra-login {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .contact-section .extra-login p a {
+        color: rgba(229 56 56); /* Luxurious gold color */
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .contact-section .extra-login p a:hover {
+        text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+        .contact-section .form-section {
+            padding: 25px;
+            width: 90%;
+        }
+
+        .contact-section h3 {
+            font-size: 26px;
+        }
+
+        .contact-section .btn-md.btn-success {
+            font-size: 14px;
+        }
+    }
+</style>
+
+<div class="sub-banner overview-bgi">
+    <div class="container breadcrumb-area">
+        <div class="breadcrumb-areas">
+            <h1>Register</h1>
+            <ul class="breadcrumbs">
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li class="active">Register</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="contact-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="form-section">
+                    <div class="logo-2">
+                        <a href="{% url 'home' %}" style="color: rgb(215, 0, 0); font-size: 35px;">
+                            <img src="{% static 'img/png.png' %}" alt="Logo" style="width: 150px; height: auto;">
+                        </a>
+                    </div>
+                    <h3 style="color:white;">Create an account</h3>
+
+                    {% include 'includes/messages.html' %}
+                    <form action="{% url 'register' %}" method="POST">
+                      {% csrf_token %}
+                        <div class="form-group form-box">
+                            <input type="text" name="firstname" class="input-text" placeholder="First Name" required>
+                            <i class="fa fa-user"></i>
+                        </div>
+                        <div class="form-group form-box">
+                            <input type="text" name="lastname" class="input-text" placeholder="Last Name" required>
+                            <i class="fa fa-user"></i>
+                        </div>
+                        <div class="form-group form-box">
+                            <input type="text" name="username" class="input-text" placeholder="Username" required>
+                            <i class="fa fa-user"></i>
+                        </div>
+                        <div class="form-group form-box">
+                            <input type="email" name="email" class="input-text" placeholder="Email Address" required>
+                            <i class="flaticon-mail"></i>
+                        </div>
+                        <div class="form-group form-box">
+                            <input type="password" name="password" class="input-text" placeholder="Password" required>
+                            <i class="flaticon-lock"></i>
+                        </div>
+                        <div class="form-group form-box">
+                            <input type="password" name="confirm_password" class="input-text" placeholder="Confirm Password" required>
+                            <i class="flaticon-lock"></i>
+                        </div>
+                        <div class="form-group mb-0 clearfix">
+                            <button type="submit" class="btn-md btn-success float-left">Register</button>
+                        </div>
+                        <div class="extra-login clearfix">
+                            <span><p><b>Already a member? <a href="{% url 'login' %}" class="thembo"> Login here</b></a></p></span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

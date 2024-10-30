@@ -1,0 +1,126 @@
+        html {
+            height: 100%;
+            width: 100%;
+            overflow-y: scroll;
+        }
+
+        body {
+            background-image: url('1.jpg');
+            height: 100%;
+            width: 100%;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {    
+            height: auto;
+            width: 60%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 0;
+            margin: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            margin-bottom: 5px;
+            color: white;
+            text-align: center;
+            width: 100%;
+        }
+
+        input {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #000000;
+            border-radius: 4px;
+            width: 370%;
+            background-color: #ffffff;
+            color: rgb(0, 0, 0);
+            font-size: 1rem;
+        }
+
+        input::placeholder {
+            color: #020202;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        hr {
+            margin-top: 20px;
+            border: 1px solid #444;
+            width: 100%;
+        }
+
+        @media only screen and (max-width: 950px) {
+            .container {    
+                height: auto;
+                min-width: 80%;
+            }
+
+            form {
+                width: 100%;
+            }
+
+            input {
+                width: 80%;
+            }
+        }
+
+        @media only screen and (max-width: 500px) {
+            .container {    
+                height: auto;
+                min-width: 100%;
+            }
+
+            form {
+                width: 100%;
+            }
+
+            input {
+                width: 80%;
+            }
+        }
+
+p {
+    margin-top: 10px;
+}
+
+p a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+p a:hover {
+    text-decoration: none;
+}
+

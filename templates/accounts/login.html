@@ -1,0 +1,189 @@
+{% extends 'base.html' %}
+
+{% block title %} | Login {% endblock %}
+{% block content %}
+{% load static %}
+<style>
+    /* Page-specific styling */
+    .sub-banner {
+        background-color: #f5f5f5;
+        padding: 50px 0;
+        text-align: center;
+    }
+
+    .sub-banner .breadcrumb-area {
+        color: #fff;
+        padding: 20px 0;
+    }
+
+    .sub-banner .breadcrumb-areas h1 {
+        font-size: 36px;
+        margin: 0;
+    }
+
+    .sub-banner .breadcrumbs {
+        list-style: none;
+        padding: 0;
+    }
+
+    .sub-banner .breadcrumbs li {
+        display: inline;
+        margin: 0 5px;
+    }
+
+    .sub-banner .breadcrumbs li a {
+        color: #fff;
+        text-decoration: none;
+    }
+
+    .sub-banner .breadcrumbs li.active {
+        color: rgba(229 56 56); /* Luxurious gold color */
+    }
+
+    .contact-section {
+        background-color: #121212;
+        color: #f4f4f4;
+        padding: 50px 0;
+    }
+
+    .contact-section .form-section {
+        background-color: rgba(0, 0, 0, 0.8);
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .contact-section .logo-2 a {
+        color: #d70000; /* Bright red color */
+        font-size: 35px;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    .contact-section h3 {
+        text-align: center;
+        color: rgba(229 56 56); /* Luxurious gold color */
+        margin-bottom: 20px;
+    }
+
+    .contact-section .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .contact-section .form-group .input-text {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #333;
+        border-radius: 8px;
+        background-color: #222;
+        color: #ddd;
+        padding-left: 40px; /* Add space for icons */
+        position: relative;
+    }
+
+    .contact-section .form-group .input-text::placeholder {
+        color: #999;
+    }
+
+    .contact-section .form-group .form-box i {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #ddd;
+    }
+
+    .contact-section .btn-md.btn-success {
+        background-color: rgba(229 56 56); /* Luxurious gold color */
+        color: #fff;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 30px;
+        text-transform: uppercase;
+        font-weight: bold;
+        transition: background-color 0.3s;
+    }
+
+    .contact-section .btn-md.btn-success:hover {
+        background-color: transparent;
+        border: 2px solid rgba(229 56 56);
+        color: rgba(229 56 56);
+    }
+
+    .contact-section .extra-login {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .contact-section .extra-login p a {
+        color: rgba(229 56 56); /* Luxurious gold color */
+        text-decoration: none;
+    }
+
+    .contact-section .extra-login p a:hover {
+        text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+        .contact-section .form-section {
+            padding: 20px;
+            width: 90%;
+        }
+    }
+</style>
+
+<div class="sub-banner overview-bgi">
+    <div class="container breadcrumb-area">
+        <div class="breadcrumb-areas">
+            <h1>Login To Your Account</h1>
+            <ul class="breadcrumbs">
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li class="active">Login</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="contact-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="form-section">
+                    <div class="logo-2">
+                        <a href="{% url 'home' %}" style="color: rgb(215, 0, 0); font-size: 35px;">
+                            <img src="{% static 'img/png.png' %}" alt="Logo" style="width: 150px; height: auto;">
+                        </a>
+                    </div>
+                    <h3 style="color:white;">Customer Login</h3>
+                    {% include 'includes/messages.html' %}
+                    <form action="{% url 'login' %}" method="POST">
+                      {% csrf_token %}
+                        <div class="form-group form-box">
+                            <input type="text" name="username" class="input-text" placeholder="Username" required>
+                            <i class="flaticon-mail"></i>
+                        </div>
+                        <div class="form-group form-box">
+                            <input type="password" name="password" class="input-text" placeholder="Password" required>
+                            <i class="flaticon-lock"></i>
+                        </div>
+                        <span>
+                            <p><a style="color:white;" href="{% url 'password_reset' %}" class="thembo">Forgot your password?</a></p>
+                        </span>
+                        <div class="form-group mb-0 clearfix">
+                            <button type="submit" class="btn-md btn-success float-left">Login</button>
+                        </div>
+                        <div class="extra-login clearfix">
+                            <span>
+                                <p><b>Don't have an account?</b> <a href="{% url 'register' %}" class="thembo"><b> Register here</b></a></p>
+                            </span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %} | INQUIRY {% endblock %}
+{% block content %}
+
+{% load static %}
+{% load humanize %}
+<style>
+.form-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+.btn-dark {
+    background-color: #343a40;
+    color: #fff;
+    border: none;
+}
+.btn-dark:hover {
+    background-color: #23272b;
+}
+</style>
+
+<!-- Sub-banner start -->
+<div class="sub-banner overview-bgi">
+    <div class="container breadcrumb-area">
+        <div class="breadcrumb-areas">
+            <h1>{{single_car.car_title}}</h1>
+            <ul class="breadcrumbs">
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li class="active">CAR INQUIRY</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Sub-banner end -->
+<body>
+
+    <div class="container">
+        <div class="form-container">
+            {% comment %} <a href="{% url 'generate_pdf' inquiry.id car.id %}">Download PDF</a> {% endcomment %}
+            <a href="{% url 'dow' %}">Download PDF</a>
+                {% comment %} <a href="{% url 'generate_pdf' %}" class="btn btn-dark btn-block">Genrate Pdf</a> {% endcomment %}
+                {% comment %} <input type="submit" value="Submit" class="btn btn-dark btn-block"> {% endcomment %}
+           
+        </div>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    
+    </body>
+</body>
+{% endblock %}
+

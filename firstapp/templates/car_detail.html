@@ -1,0 +1,150 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static 'Logo.png' %}">
+    <title>Car Dealership | RUSTOM</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap">
+    <style>
+        body {
+            display: flex;
+            justify-content: center; /* Horizontally center the container */
+            align-items: center; /* Vertically center the container */
+            min-height: 100vh; /* Ensure body takes up the full viewport height */
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #1f1f1f;
+            background-image: url('{% static "bg.jpg" %}');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            background-color: rgba(0, 0, 0, 0.8); /* Darker overlay for contrast */
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            color: #f5f5f5;
+            text-align: center;
+        }
+        .car-details {
+            display: flex;
+            align-items: flex-start;
+            margin-top: 20px;
+        }
+        .car-details img {
+            max-width: 350px;
+            height: auto;
+            margin-right: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        .car-details .details {
+            flex: 1;
+            text-align: left;
+        }
+        .details h3 {
+            margin-top: 0;
+            font-size: 2rem;
+            color: rgba(246,80,80,255); /* Gold color for luxury */
+        }
+        .details p {
+            margin: 10px 0;
+            font-size: 1rem;
+            color: #e0e0e0;
+        }
+        .details p strong {
+            color: rgba(246,80,80,255); /* Gold color for emphasis */
+        }
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100px; /* Increased height for navbar */
+            background: rgb(0 0 0 / 0%); /* Transparent background with slight shadow */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6); /* Enhanced shadow for better visibility */
+            backdrop-filter: blur(10px); /* Optional: Add a blur effect to the background */
+        }
+        header nav {
+            width: 90%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+        }
+        header nav .logo {
+            color: rgba(246,80,80,255); /* Gold color for logo */
+            font-size: 36px; /* Larger font size for the logo */
+            font-weight: 700;
+            text-decoration: none;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        header nav .menu {
+            display: flex;
+            align-items: center;
+        }
+        header nav .menu a {
+            color: #fff;
+            margin-left: 30px; /* Increased spacing between menu items */
+            text-decoration: none;
+            font-size: 18px; /* Larger font size for the menu items */
+            position: relative;
+            font-weight: 500;
+            padding: 10px; /* Add padding for larger clickable area */
+        }
+        header nav .menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background-color: rgba(246,80,80,255);
+            transition: width 0.3s ease;
+        }
+        header nav .menu a:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a class="logo" href="{% url 'home' %}">
+                <img src="{% static 'img/png.png' %}" alt="Logo" style="width: 150px; height: auto;">
+            </a>
+            <div class="menu">
+                <a href="{% url 'index' %}">Home</a>
+                <a href="{% url 'view_all_cars' %}">Inventory</a>
+                <a href="{% url 'add_car' %}">Add Car</a>
+                <a href="{% url 'prof' %}">Profile</a>
+                <a href="{% url 'logout_view' %}">Logout</a>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <h2>Car Details</h2>
+        <div class="car-details">
+            <img src="{{ car.car_image.url }}" alt="Car Image">
+            <div class="details">
+                <h3>{{ car.car_name }}</h3>
+                <p><strong>Model:</strong> {{ car.car_model }}</p>
+                <p><strong>Engine:</strong> {{ car.car_engine }}</p>
+                <p><strong>Power:</strong> {{ car.car_power }}</p>
+                <p><strong>Seating Capacity:</strong> {{ car.seating_capacity }}</p>
+                <p><strong>Transmission:</strong> {{ car.transmission }}</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

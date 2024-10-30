@@ -1,0 +1,248 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static 'Logo.png' %}">
+    <title>CARS | RUSTOM</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0d0d0d;
+            color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 100px auto 20px;
+            padding: 20px;
+            background-color: #1a1a1a;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+        .car-item {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #2a2a2a;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .car-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+        }
+        .car-item img {
+            max-width: 480px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+            margin-right: 20px;
+        }
+        .car-details {
+            flex: 1;
+        }
+        .car-details h3 {
+            margin-top: 0;
+            color: #f4f4f4;
+            font-size: 24px;
+            font-weight: 700;
+        }
+        .car-details p {
+            margin: 5px 0;
+            color: #dcdcdc;
+            font-size: 18px;
+        }
+        .btn-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .btn, .delete-btn, .input-button, .download-btn {
+            height: 45px;
+            color: #fff;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            padding: 0 25px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .btn, .download-btn {
+            background: linear-gradient(to right, #cda34f, #d4af37);
+            transition: background 0.3s;
+        }
+        .btn:hover, .download-btn:hover {
+            background: linear-gradient(to right, #d4af37, #cda34f);
+        }
+        .delete-btn {
+            width: 120px;
+            background: linear-gradient(to right, #b71c1c, #e53935);
+            font-size: 16px;
+        }
+        .input-file-container {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            align-items: center;
+            gap: 15px;
+        }
+        .input-file-container input[type="file"] {
+            width: 220px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            border: 1px solid #444;
+            background-color: #333;
+            color: #fff;
+        }
+        .input-file-label {
+            background: linear-gradient(to right, #4CAF50, #45a049);
+            color: #fff;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            text-align: center;
+            width: 120px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+        .upload-btn {
+            background: linear-gradient(to right, #4CAF50, #45a049);
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 120px;
+            height: 45px;
+        }
+        /* Transparent Navbar styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            background: transparent;
+        }
+        header nav {
+            width: 90%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+        }
+        header nav .logo {
+            color: #d4af37;
+            font-size: 50px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        header nav .menu {
+            display: flex;
+            align-items: center;
+        }
+        header nav .menu a {
+            color: #f4f4f4;
+            margin-left: 30px;
+            position: relative;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+        header nav .menu a:hover {
+            color: rgba(246,80,80,255);
+        }
+        header nav .menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background-color: rgba(246,80,80,255);
+            transition: width 0.4s ease;
+        }
+        header nav .menu a:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a class="logo" href="{% url 'home' %}">
+                <img src="{% static 'img/png.png' %}" alt="Logo" style="width: 150px; height: auto;">
+            </a>
+            <div class="menu">
+                <a href="{% url 'index' %}">Home</a>
+                <a href="{% url 'view_all_cars' %}">Inventory</a>
+                <a href="{% url 'add_car' %}">Add Car</a>
+                <a href="{% url 'prof' %}">User Profile</a>
+                <a href="{% url 'proadm' %}">Admin Profile</a>
+                <a href="{% url 'logout_view' %}">Logout</a>
+            </div>
+        </nav>
+    </header>
+    
+    <div class="container">
+        <h2 style="text-align:center; color: #f4f4f4;">Rustom Cars</h2>
+        <div class="btn-container">
+            <form method="post" enctype="multipart/form-data" action="{% url 'upload_csv' %}">
+                {% csrf_token %}
+                <div class="input-file-container">
+                    <input type="file" name="csv_file" id="csv_file" class="input-file" required>
+                    <button type="submit" class="upload-btn">Upload CSV</button>
+                </div>
+            </form>
+            <a href="{% url 'download_csv' %}" class="download-btn">Download CSV</a>
+        </div><br>
+        {% for car in cars %}
+        <div class="car-item">
+            <img src="{{ car.car_image.url }}" alt="Car Image">
+            <div class="car-details">
+                <h3>{{ car.car_name }}</h3>
+                <p><strong>Model:</strong> {{ car.car_model }}</p>
+                <p><strong>Engine:</strong> {{ car.car_engine }}</p>
+                <p><strong>Power:</strong> {{ car.car_power }}</p>
+                <p><strong>Seating Capacity:</strong> {{ car.seating_capacity }}</p>
+                <p><strong>Transmission:</strong> {{ car.transmission }}</p>
+                <hr>
+                <div class="btn-container">
+                    <a href="{% url 'update_car' pk=car.pk %}" class="btn">Update</a>
+                    <form action="{% url 'delete_car' pk=car.pk %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="delete-btn">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p style="color: #f4f4f4;">No Cars Available</p>
+        {% endfor %}
+    </div>
+
+</body>
+</html>

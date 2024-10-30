@@ -1,0 +1,63 @@
+.form-container {
+    background-color: ff3300;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 400px;
+    margin: 100px auto;
+}
+
+.form-container h1 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #ffffff;
+}
+
+#testDriveForm {
+    display: flex;
+    flex-direction: column;
+}
+
+#testDriveForm input, 
+#testDriveForm select {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #ffffff;
+    color: #000000;
+}
+
+#testDriveForm input::placeholder {
+    color: #0c0101;
+}
+
+/* #testDriveForm button {
+    background-color: #800000;
+    color: #ffffff;
+    border: none;
+    padding: 0.75rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#testDriveForm button:hover {
+    background-color: #b30000;
+} */
+
+.btn{
+    padding: 10px 30px;
+    background-color: #dd0707;
+    text-transform: uppercase;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 30px;
+    border: 2px solid #dd0707;
+    transition: 0.3s;
+}
+
+.btn:hover{
+    background-color: transparent;
+}

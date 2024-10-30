@@ -1,0 +1,195 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADMIN PROFILE | RUSTOM</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #1e1e1e;
+            color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            background: transparent;
+        }
+
+        header nav {
+            width: 90%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+        }
+
+        header nav .logo {
+            color: rgba(246,80,80,255); /* Gold color for logo */
+            font-size: 50px;
+            font-weight: bold;
+            text-decoration: none;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+        }
+
+        header nav .menu {
+            display: flex;
+            align-items: center;
+        }
+
+        header nav .menu a {
+            color: #f4f4f4;
+            margin-left: 30px;
+            position: relative;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+
+        header nav .menu a:hover {
+            color: rgba(246,80,80,255);
+        }
+
+        header nav .menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background-color: rgba(246,80,80,255);
+            transition: width 0.4s ease;
+        }
+
+        header nav .menu a:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            height: 200px; 
+            background: url('{% static "hero-bg.jpg" %}') no-repeat center center/cover; 
+            margin-top: 80px; /* Adjusted for fixed header */
+            margin-bottom: 20px;
+            border-bottom: 3px solid rgba(246,80,80,255); /* Gold bottom border */
+        }
+
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 2.5rem;
+            color: rgba(246,80,80,255); /* Gold color for headings */
+        }
+
+        table {
+            width: 90%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-radius: 8px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #333;
+        }
+
+        th {
+            background-color: #333;
+            color: rgba(246,80,80,255); /* Gold color for header cells */
+        }
+
+        td {
+            color: #f5f5f5;
+        }
+
+        .delete-button, .add-button {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 12px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .delete-button:hover, .add-button:hover {
+            background-color: #c0392b;
+        }
+
+        .add-row-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        input {
+            margin-right: 10px;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a class="logo" href="{% url 'index' %}"><b>RUSTOM</b></a>
+            <div class="menu">
+                <a href="{% url 'index' %}">Home</a>
+                <a href="{% url 'view_all_cars' %}">Inventory</a>
+                <a href="{% url 'add_car' %}">Add Car</a>
+                <a href="{% url 'prof' %}">User Profile</a>
+                <a href="{% url 'proadm' %}">Admin Profile</a>
+                <a href="{% url 'logout_view' %}">Logout</a>
+            </div>
+        </nav>
+    </header>
+    <div class="hero"></div>
+    <h1>User Profiles</h1>
+    <table id="profileTable">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Branch</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.phone }}</td>
+                <td>{{ user.branch }}</td>
+                <td>
+                    <form action="{% url 'delete_user' user.id %}" method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <button class="delete-button" type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

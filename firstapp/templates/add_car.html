@@ -1,0 +1,197 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static 'Logo.png' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>ADD CAR | RUSTOM</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif; /* Modern font for a luxurious feel */
+        }
+
+        /* Background styling */
+        body {
+            background-color: #121212;
+            background-image: url('{% static "bg.jpg" %}');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+        }
+
+        /* Header styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background-color:rgb(0 0 0 / 0%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        header nav {
+            width: 90%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header nav .logo {
+            color: rgba(246,80,80,255); /* Luxurious gold color */
+            font-size: 35px;
+            font-weight: 700;
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        header nav .menu {
+            display: flex;
+            align-items: center;
+        }
+
+        header nav .menu a {
+            color: #f4f4f4;
+            margin-left: 30px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        header nav .menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background-color: rgba(246,80,80,255); /* Luxurious gold color */
+            transition: width 0.4s ease;
+        }
+
+        header nav .menu a:hover::after {
+            width: 100%;
+        }
+
+        /* Container for form content */
+        .container {
+            background-color: rgba(0, 0, 0, 0.8); /* Dark semi-transparent background */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 60%;
+            margin: 120px auto;
+            color: #f4f4f4;
+        }
+
+        /* Form styling */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-control, .form-control-file {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #333;
+            border-radius: 8px;
+            background-color: #222;
+            color: #ddd;
+        }
+
+        .form-control::placeholder, .form-control-file::placeholder {
+            color: #999;
+        }
+
+        .btn-primary {
+            padding: 12px 30px;
+            background-color: rgba(246,80,80,255); /* Luxurious gold color */
+            text-transform: uppercase;
+            color: #fff;
+            font-weight: 700;
+            border-radius: 30px;
+            border: 2px solid rgba(246,80,80,255);
+            transition: background 0.3s, border-color 0.3s;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background-color: transparent;
+            border-color: rgba(246,80,80,255);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a class="logo" href="{% url 'home' %}">
+                <img src="{% static 'img/png.png' %}" alt="Logo" style="width: 150px; height: auto;">
+            </a>
+            <div class="menu">
+                <a href="{% url 'index' %}">Home</a>
+                <a href="{% url 'view_all_cars' %}">Inventory</a>
+                <a href="{% url 'add_car' %}">Add Car</a>
+                <a href="{% url 'prof' %}">User Profile</a>
+                <a href="{% url 'proadm' %}">Admin Profile</a>
+                <a href="{% url 'logout_view' %}">Logout</a>
+            </div>
+        </nav>
+    </header>
+    
+    <div class="container">
+        <h1 style="text-align: center; color: rgba(246,80,80,255);">Add a Car</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_car_name">Car Name:</label>
+                <input type="text" class="form-control" id="id_car_name" name="car_name" placeholder="Enter car name" required>
+            </div>
+            <div class="form-group">
+                <label for="id_car_model">Car Model:</label>
+                <input type="text" class="form-control" id="id_car_model" name="car_model" placeholder="Enter car model" required>
+            </div>
+            <div class="form-group">
+                <label for="id_car_engine">Car Engine (CC):</label>
+                <input type="text" class="form-control" id="id_car_engine" name="car_engine" placeholder="Enter car engine capacity" required>
+            </div>
+            <div class="form-group">
+                <label for="id_car_power">Car Power:</label>
+                <input type="text" class="form-control" id="id_car_power" name="car_power" placeholder="Enter car power" required>
+            </div> 
+            <div class="form-group">
+                <label for="id_seating_capacity">Seating Capacity:</label>
+                <input type="text" class="form-control" id="id_seating_capacity" name="seating_capacity" placeholder="Enter seating capacity" required>
+            </div>
+            <div class="form-group">
+                <label for="id_transmission">Transmission:</label>
+                <select class="form-control" id="id_transmission" name="transmission" required>
+                    <option value="automatic">Automatic</option>
+                    <option value="manual">Manual</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="id_car_image">Car Image:</label>
+                <input type="file" class="form-control-file" id="id_car_image" name="car_image" accept="image/*" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Car</button>
+        </form>
+    </div>
+</body>
+</html>

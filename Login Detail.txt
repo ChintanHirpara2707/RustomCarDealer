@@ -1,0 +1,15 @@
+Customer Side Login Info :-
+First name : User
+Last name  : 1
+Username   : user1
+Email      : user1@gmail.com
+Password   : user@1
+
+Admin Side Login Info :-
+Username   : Admin
+Email      : admin1@gmail.com
+Password   : admin@1
+
+Django Super User :-
+Username : admin
+password : admin@1

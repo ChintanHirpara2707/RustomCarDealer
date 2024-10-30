@@ -1,0 +1,168 @@
+{% extends 'base.html' %}
+
+{% block title %} | Dashboard {% endblock %}
+{% block content %}
+{% load static %}
+<style>
+    /* Page-specific styling */
+    .sub-banner {
+        background-color: #1e1e1e;
+        padding: 80px 0;
+        text-align: center;
+        color: #fff;
+        background-image: url('{% static "dashboard-banner-bg.jpg" %}');
+        background-size: cover;
+        background-position: center center;
+    }
+
+    .sub-banner .breadcrumb-area {
+        padding: 30px 0;
+    }
+
+    .sub-banner .breadcrumb-areas h1 {
+        font-size: 46px;
+        margin: 0;
+        font-weight: 700;
+        color: rgba(255 255 255); /* Luxurious gold color */
+    }
+
+    .sub-banner .breadcrumbs {
+        list-style: none;
+        padding: 0;
+    }
+
+    .sub-banner .breadcrumbs li {
+        display: inline;
+        margin: 0 5px;
+    }
+
+    .sub-banner .breadcrumbs li a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .sub-banner .breadcrumbs li.active {
+        color: rgba(229 56 56); /* Luxurious gold color */
+    }
+
+    .main-title {
+        text-align: left;
+        margin-bottom: 30px;
+        color: #fff;
+    }
+
+    .main-title h1 {
+        font-size: 36px;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+
+    .main-title h1 span {
+        color: rgba(229 56 56); /* Luxurious gold color */
+    }
+
+    .main-title p {
+        font-size: 18px;
+        color: #f4f4f4;
+    }
+
+    .table {
+        width: 100%;
+        margin-bottom: 1rem;
+        background-color: transparent;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .table thead th {
+        background-color: #333;
+        color: rgba(255 255 255); /* Luxurious gold color */
+        font-weight: 600;
+        border-bottom: 2px solid rgba(255 255 255);
+    }
+
+    .table tbody tr {
+        background-color: #222;
+    }
+
+    .table tbody td {
+        color: #ddd;
+        border-top: 1px solid #444;
+    }
+
+    .btn-dark {
+        background-color: rgba(229 56 56); /* Luxurious gold color */
+        color: #fff;
+        border: none;
+        border-radius: 30px;
+        padding: 10px 20px;
+        font-weight: bold;
+        text-transform: uppercase;
+        transition: background-color 0.3s, border-color 0.3s;
+    }
+
+    .alert-primary {
+        background-color: #1e1e1e;
+        color: #fff;
+        border-color: #333;
+        border-radius: 8px;
+        padding: 15px;
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .alert-primary h4 {
+        margin: 0;
+        font-size: 20px;
+    }
+</style>
+
+<div class="sub-banner overview-bgi">
+    <div class="container breadcrumb-area">
+        <div class="breadcrumb-areas">
+            <h1>Dashboard</h1>
+            <ul class="breadcrumbs">
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li class="active">{{user.first_name}}</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!--   Dashboard Start   -->
+
+<div class="container mt-50 mb-50">
+  {% include 'includes/messages.html' %}
+	<div class="main-title">
+        <h1>Welcome <span>{{user.first_name}} {{user.last_name}},</span></h1>
+        <p style="color:black;">Here are the list of the cars that you have inquired about:</p>
+    </div>
+    {% if inquiries %}
+        <table class="table table-hover table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Car Name</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for inquiry in inquiries %}
+                    <tr>
+                        <th style="color:black;"scope="row">{{ forloop.counter }}</th>
+                        <td style="color:black;">{{ inquiry.car_title }}</td>
+                        <td style="color:black;">{{ inquiry.city }}</td>
+                        <td><a href="{% url 'car_detail' inquiry.car_id %}" class="btn btn-dark">View Car</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="alert alert-primary" role="alert">
+            <h4>You have no inquiries!!</h4>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

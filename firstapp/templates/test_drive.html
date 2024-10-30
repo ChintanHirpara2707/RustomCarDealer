@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Test Drive</title>
+
+    <!-- Link Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Link File CSS -->
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href= "{% static 'test_drive.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <a class="logo" href="{% url 'index' %}" style="color: rgb(215, 0, 0); font-size: 35px;"><b>RUSTOM</b></a>
+            <div class="menu">
+                <a href="{% url 'index' %}">Home</a>
+                <a href="{% url 'view_all_cars' %}">Inventory</a>
+                <a href="{% url 'about_us' %}">About Us</a>
+                <a href="{% url 'contact_us' %}">Contact Us</a>
+                <a href="{% url 'customer_review' %}">Customer Review</a>
+                <a href="{% url 'add_car' %}">Add Car</a>
+                <a href="{% url 'logout_view' %}">Logout</a>
+                <a href="{% url 'download_csv' %}">Profiles</a>
+            </div>
+        </nav>
+    </header>
+    
+    <div class="hero">
+        <div class="form-container">
+            <h1>Book a Test Drive</h1>
+            <form id="testDriveForm" method="post" action="{% url 'test_drive' %}">
+                {% csrf_token %}
+                <input type="text" name="name" placeholder="Full Name" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="tel" name="phone" placeholder="Phone Number" required>
+                <input type="date" name="date" required>
+                <select name="car_model" required>
+                    <option value="">Select Car Model</option>
+                    <option value="model1">Porshe</option>
+                    <option value="model2">AMG</option>
+                    <option value="model3">Defender</option>
+                </select>
+                <button type="submit" class="btn">Book Test Drive</button>
+            </form>
+            
+        </div>
+    </div>
+    <script src="test_drive.js"></script>
+</body>
+</html>

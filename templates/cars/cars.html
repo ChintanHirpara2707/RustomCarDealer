@@ -1,0 +1,374 @@
+{% extends 'base.html' %}
+
+{% block title %} | INVENTORY {% endblock %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+
+<style>
+    /* Sub-banner styles */
+    .sub-banner {
+        background-color: #1a1a1a; /* Darker background for a more luxurious look */
+        padding: 120px 0;
+        text-align: center;
+        color: #ffffff;
+        {% comment %} background-image: url('{% static "luxury-bg.jpg" %}'); /* Luxurious background image */ {% endcomment %}
+        background-size: cover;
+        background-position: center center;
+        {% comment %} border-bottom: 5px solid #b49e58; /* Gold border */ {% endcomment %}
+    }
+
+    .breadcrumb-area h1 {
+        font-size: 60px;
+        margin: 0;
+        font-weight: 900;
+        color: rgba(229 56 56); /* Luxurious gold color */
+    }
+
+    .breadcrumbs a {
+        color: #ffffff;
+        text-decoration: none;
+        font-weight: 600;
+        border-bottom: 2px solid transparent;
+        transition: border-bottom 0.3s;
+    }
+
+    .breadcrumbs a:hover {
+        border-bottom: 2px solid rgba(229 56 56); /* Luxurious gold underline on hover */
+    }
+
+    .breadcrumbs .active {
+        color: rgba(229 56 56); /* Luxurious gold color */
+    }
+
+    /* Car box styles */
+    .car-box-3 {
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        transition: all 0.4s ease;
+        background-color: #282828; /* Dark background for luxury look */
+    }
+
+    .car-box-3 .car-thumbnail {
+        position: relative;
+        overflow: hidden;
+        border-radius: 15px 15px 0 0;
+    }
+
+    .car-box-3 .car-thumbnail .tag {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        background-color: rgba(229 56 56); /* Luxurious gold color */
+        color: #fff;
+        padding: 5px 10px;
+        font-weight: 700;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+
+    .car-box-3 .car-thumbnail .price-box {
+        position: absolute;
+        bottom: 15px;
+        right: 15px;
+        {% comment %} background-color: #000; {% endcomment %}
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 25px;
+        font-size: 16px;
+        font-weight: 700;
+    }
+
+    .car-box-3 .detail {
+        padding: 20px;
+        color: #fff;
+    }
+
+    .car-box-3 .detail .title {
+        font-size: 24px;
+        margin-bottom: 15px;
+        font-weight: 700;
+        color: rgba(229 56 56); /* Luxurious gold color */
+    }
+
+    .car-box-3 .detail .title a {
+        {% comment %} color: #b49e58; {% endcomment %}
+        color:rgba(246,80,80,255);
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+
+    .car-box-3 .detail .title a:hover {
+        color: rgba(229 56 56); /* Slightly lighter gold on hover */
+    }
+
+    .car-box-3 .detail .location {
+        font-size: 16px;
+        margin-bottom: 20px;
+        color: #c4c4c4;
+    }
+
+    .car-box-3 .detail .facilities-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        font-size: 16px;
+        font-weight: 500;
+        color: #e0e0e0;
+    }
+
+    .car-box-3 .detail .facilities-list li {
+        display: inline-block;
+        margin-right: 15px;
+    }
+
+    /* Sidebar styles */
+    .sidebar-title {
+        font-size: 22px;
+        color: rgba(229 56 56); /* Luxurious gold color */
+        margin-bottom: 20px;
+        font-weight: 700;
+    }
+
+    .advanced-search2 .form-control {
+        {% comment %} background-color: #333; {% endcomment %}
+        color: #fff;
+        border: 1px solid #444;
+        padding: 10px 15px;
+        font-size: 16px;
+        border-radius: 5px;
+    }
+
+    .advanced-search2 .form-control:focus {
+        border-color: rgba(229 56 56); /* Luxurious gold border on focus */
+        {% comment %} background-color: #444; {% endcomment %}
+        box-shadow: none;
+    }
+
+    .range-slider-ui {
+        background-color: #444;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    .range-slider-ui .ui-slider-handle {
+        background-color: rgba(229 56 56); /* Luxurious gold handle */
+        border-radius: 50%;
+    }
+
+    .button-theme {
+        background-color: rgba(229 56 56); /* Luxurious gold button */
+        border-color: rgba(229 56 56);
+        color: #fff;
+        font-weight: 700;
+        font-size: 16px;
+    }
+
+    .button-theme:hover {
+        background-color: rgba(229 60 60); /* Lighter gold on hover */
+        border-color: rgba(229 56 56);
+    }
+
+    .pagination-box .page-item .page-link {
+        color: rgba(229 56 56); /* Luxurious gold color */
+        background-color: transparent;
+        border: none;
+        font-size: 18px;
+        font-weight: 700;
+    }
+
+    .pagination-box .page-item .page-link.active {
+        background-color: rgba(229 56 56); /* Luxurious gold color */
+        color: #fff;
+        border-radius: 50%;
+    }
+
+    .pagination-box .page-item .page-link:hover {
+        color: rgba(229 56 56); /* Lighter gold on hover */
+    }
+</style>
+
+<!-- Sub banner start -->
+<div class="sub-banner overview-bgi">
+    <div class="container breadcrumb-area">
+        <div class="breadcrumb-areas">
+            <h1>Our Car Inventory</h1>
+            <ul class="breadcrumbs">
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li class="active">Cars</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Sub Banner end -->
+
+<!-- Featured car start -->
+<div class="featured-car content-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-12">
+                <div class="row">
+                    {% for car in cars %}
+                        <div class="col-lg-6 col-md-6">
+                            <div class="car-box-3 luxury-box">
+                                <div class="car-thumbnail">
+                                    <a href="{% url 'car_detail' car.id %}" class="car-img">
+                                        <div style="background-color:rgba(229 56 56);"class="tag">For Sale</div>
+                                        <div class="price-box">
+                                            <span> {{ car.price | intcomma }}</span>
+                                        </div>
+                                        <img class="d-block w-100" src="{{ car.car_photo.url }}" alt="car" style="min-height: 262px; max-height: 262px;">
+                                    </a>
+                                    <div class="carbox-overlap-wrapper">
+                                        <div class="overlap-box">
+                                            <div class="overlap-btns-area">
+                                                <div class="car-magnify-gallery">
+                                                    <a href="{{ car.car_photo.url }}" class="overlap-btn">
+                                                        <i class="fa fa-expand"></i>
+                                                        <img class="hidden" src="{{ car.car_photo.url }}">
+                                                    </a>
+                                                    {% if car.car_photo_1 %}
+                                                        <a href="{{ car.car_photo_1.url }}" class="hidden">
+                                                            <img class="hidden" src="{{ car.car_photo_1.url }}">
+                                                        </a>
+                                                    {% endif %}
+                                                    {% if car.car_photo_2 %}
+                                                        <a href="{{ car.car_photo_2.url }}" class="hidden">
+                                                            <img class="hidden" src="{{ car.car_photo_2.url }}">
+                                                        </a>
+                                                    {% endif %}
+                                                    {% if car.car_photo_3 %}
+                                                        <a href="{{ car.car_photo_3.url }}" class="hidden">
+                                                            <img class="hidden" src="{{ car.car_photo_3.url }}">
+                                                        </a>
+                                                    {% endif %}
+                                                    {% if car.car_photo_4 %}
+                                                        <a href="{{ car.car_photo_4.url }}" class="hidden">
+                                                            <img class="hidden" src="{{ car.car_photo_4.url }}">
+                                                        </a>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="detail">
+                                    <h1 class="title">
+                                        <a href="{% url 'car_detail' car.id %}">{{ car.car_title }}</a>
+                                    </h1>
+                                    <div class="location">
+                                        <i class="flaticon-pin"></i> {{ car.state }}, {{ car.city }}
+                                    </div>
+                                    <ul class="facilities-list clearfix">
+                                        <li>{{ car.fuel_type }}</li>
+                                        <li>{{ car.miles | intcomma }} miles</li>
+                                        <li>{{ car.transmission }}</li>
+                                        <li>{{ car.body_style }}</li>
+                                        <li>{{ car.color }}</li>
+                                        <li>{{ car.year }}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <!-- Page navigation start -->
+                <div class="pagination-box p-box-2 text-center">
+                    <nav aria-label="Page navigation example">
+                        {% if cars.has_other_pages %}
+                            <ul class="pagination">
+                                {% if cars.has_previous %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ cars.previous_page_number }}"><i class="fa fa-angle-left"></i></a>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item disabled">
+                                        <a class="page-link"><i class="fa fa-angle-left"></i></a>
+                                    </li>
+                                {% endif %}
+
+                                {% for i in cars.paginator.page_range %}
+                                    {% if cars.number == i %}
+                                        <li class="page-item"><a class="page-link active" href="#">{{ i }}</a></li>
+                                    {% else %}
+                                        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                                    {% endif %}
+                                {% endfor %}
+
+                                {% if cars.has_next %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ cars.next_page_number }}"><i class="fa fa-angle-right"></i></a>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item disabled">
+                                        <a class="page-link"><i class="fa fa-angle-right"></i></a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        {% endif %}
+                    </nav>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-12">
+                <div class="sidebar-right">
+                    <!-- Advanced search start -->
+                    <div class="widget advanced-search2">
+                        <h3 class="sidebar-title">Search Cars</h3>
+                        <form action="{% url 'search' %}" method="">
+                            <div class="form-group">
+                                <input type="text" name="keyword" placeholder="Search by name" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control search-fields" name="model">
+                                    <option selected="true" disabled="disabled">Model</option>
+                                    {% for model in model_search %}
+                                        <option value="{{ model }}">{{ model }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control search-fields" name="city">
+                                    <option selected="true" disabled="disabled">Location</option>
+                                    {% for city in city_search %}
+                                        <option value="{{ city }}">{{ city }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control search-fields" name="year">
+                                    <option selected="true" disabled="disabled">Year</option>
+                                    {% for year in year_search %}
+                                        <option value="{{ year }}">{{ year }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control search-fields" name="body_style">
+                                    <option selected="true" disabled="disabled">Select Type Of Car</option>
+                                    {% for body_style in body_style_search %}
+                                        <option value="{{ body_style }}">{{ body_style }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            {% comment %} <div class="range-slider clearfix">
+                                <label>Price</label>
+                                <div data-min="0" data-max="150000" data-min-name="min_price" data-max-name="max_price" data-unit="USD" class="range-slider-ui ui-slider" aria-disabled="false"></div>
+                                <div class="clearfix"></div>
+                            </div> {% endcomment %}
+                            <div class="form-group">
+                                <button class="btn btn-block button-theme btn-md">
+                                    <i class="fa fa-search"></i> Search
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Featured car end -->
+
+{% endblock %}

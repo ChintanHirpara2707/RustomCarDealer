@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #000000;
+        }
+        p {
+            line-height: 1.6;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a class="logo" href="{% url 'home' %}" style="color: rgb(215, 0, 0); font-size: 35px;"><b>RUSTOM</b></a>
+        <h1>Welcome, {{ username }}!</h1>
+        <p><h4>Thank you for signing up.</h4> We are delighted to welcome you to our team and look forward to your participation.</p>
+        <p>If you have any queries or need support, please contact our support team. They will solve all your queries.</p>
+        <p>Best regards,</p>
+        <p>The RUSTOM Car Delarship Team..</p>
+        <div class="footer">
+            <p>&copy; 2024 RUSTOM Management Team. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>

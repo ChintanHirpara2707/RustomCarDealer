@@ -1,0 +1,168 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static 'Logo.png' %}">
+    <title>UPDATE CAR | RUSTOM</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <style>
+        body {
+            font-family: 'Helvetica Neue', sans-serif;
+            background-color: #212121;
+            background-image: url('{% static "bg.jpg" %}');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 100px auto;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+            color: #fff;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 32px;
+            color: #e0e0e0;
+            font-weight: 600;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input[type="text"], input[type="number"], select {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            box-sizing: border-box;
+            border: 1px solid #444;
+            border-radius: 6px;
+            background-color: #333;
+            color: #ddd;
+        }
+
+        input[type="file"] {
+            margin-top: 10px;
+            border: 1px solid #444;
+            border-radius: 6px;
+            background-color: #333;
+        }
+
+        button[type="submit"] {
+            background-color: #c5a880;
+            color: #fff;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #a27f5f;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        header nav {
+            width: 90%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header nav .logo {
+            color: #d4af37;
+            font-size: 30px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        header nav .menu {
+            display: flex;
+            align-items: center;
+        }
+
+        header nav .menu a {
+            color: #f4f4f4;
+            margin-left: 30px;
+            position: relative;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+        header nav .menu a:hover {
+            color: #cda34f;
+        }
+        header nav .menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background-color: #cda34f;
+            transition: width 0.4s ease;
+        }
+
+        header nav .menu a:hover::after {
+            width: 100%;
+        }
+
+        header nav .menu a:hover {
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a class="logo" href="{% url 'home' %}">
+                <img src="{% static 'img/png.png' %}" alt="Logo" style="width: 150px; height: auto;">
+            </a>
+            <div class="menu">
+                <a href="{% url 'index' %}">Home</a>
+                <a href="{% url 'view_all_cars' %}">Inventory</a>
+                <a href="{% url 'add_car' %}">Add Car</a>
+                <a href="{% url 'prof' %}">Profile</a>
+                <a href="{% url 'logout_view' %}">Logout</a>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <h2>Edit Car Details</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Update Car</button>
+        </form>
+    </div>
+</body>
+</html>
